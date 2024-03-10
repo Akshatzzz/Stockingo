@@ -10,4 +10,5 @@
     <color name="back_color">#141414</color>
     <color name="fab_color">#20D761</color>
     <color name="white_transparent">#12FFFFFF</color>
+    <color name="transparent">#00FFFFFF</color>
 </resources>

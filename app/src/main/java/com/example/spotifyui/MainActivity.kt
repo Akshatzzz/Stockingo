@@ -45,45 +45,9 @@ class MainActivity : AppCompatActivity() {
 //        startActivity(intent)
     }
 
-    private fun getToken(): String {
-        val sh = getSharedPreferences("MySharedPref", MODE_PRIVATE)
-        return sh.getString("token", "Not Found") ?: "Not Found"
-    }
-
     override fun onStart() {
         super.onStart()
-        generateToken()
     }
-
-    private fun generateToken() {
-        val url = "https://accounts.spotify.com/api/token?grant_type=client_credentials"
-        val queue = Volley.newRequestQueue(this@MainActivity)
-        val request = object : StringRequest(Method.POST, url,
-            Response.Listener { response ->
-                try {
-                    val jsonObject = JSONObject(response)
-                    val tk = jsonObject.getString("access_token")
-                    val sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE)
-                    val myEdit = sharedPreferences.edit()
-                    myEdit.putString("token", "Bearer $tk")
-                    myEdit.apply()
-                } catch (e: JSONException) {
-                    e.printStackTrace()
-                }
-            },
-            Response.ErrorListener { error ->
-                Toast.makeText(this@MainActivity, "Fail to get response = $error", Toast.LENGTH_SHORT).show()
-            }) {
-            override fun getHeaders(): MutableMap<String, String> {
-                val headers: MutableMap<String, String> = HashMap()
-                headers["Authorization"] = " Add your authorization here."
-                headers["Content-Type"] = "application/x-www-form-urlencoded"
-                return headers
-            }
-        }
-        queue.add(request)
-    }
-
     private fun initializeAlbumsRV() {
         val albumsRV: RecyclerView = findViewById(R.id.idRVAlbums)
         val albumRVModalArrayList = ArrayList<AlbumRVModal>()
