@@ -1,18 +1,13 @@
 package com.example.spotifyui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
-import android.widget.Toast
+import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.android.volley.Response
-import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
-import org.json.JSONException
-import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,6 +19,10 @@ class MainActivity : AppCompatActivity() {
         initializePopularAlbumsRV()
         initializeTrendingAlbumsRV()
         initializeSearchView()
+        findViewById<ImageButton>(R.id.btn_recent).setOnClickListener {
+            val intent = Intent(this,RecentActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun initializeSearchView() {

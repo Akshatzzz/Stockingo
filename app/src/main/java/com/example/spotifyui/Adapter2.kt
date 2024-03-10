@@ -20,7 +20,14 @@ class AlbumChoiceAdapter(private val albumRVModalArrayList: ArrayList<ChoiceModa
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val albumRVModal = albumRVModalArrayList[position]
-        Glide.with(context).load(R.drawable.image1).into(holder.albumIV)
+        val drawable = when(position%7) {
+            0 -> R.drawable.images
+            1 -> R.drawable.arijit_singh
+            2 -> R.drawable.image1
+            3 -> R.drawable.shaan_image
+            else -> R.drawable.coke_studio
+        }
+        Glide.with(context).load(drawable).into(holder.albumIV)
         holder.albumNameTV.text = albumRVModal.titleName
 
         holder.itemView.setOnClickListener {
